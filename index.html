@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asha Kiran Foundation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <header>
+      <div class="logo"><img src="images.jpg" alt="Ashakirana logo" height="40"> Asha Kiran</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#donate">Donate</a>
+      <a href="#volunteer">Volunteer</a>
+    </nav>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <div class="hero">
+    <h1>Every child deserves a meal, a book and a bright tomorrow</h1>
+    <p>We run learning centres, community kitchens and health camps.</p>
+    <a href="#donate" class="btn">Donate Now</a>
+  </div>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <h2>Who We Are</h2>
+    <p>
+      Asha Kiran Foundation started in 2012 with one classroom under a tree.
+      Today we help more than 4,000 people every year.
+    </p>
+  </section>
+
+  <!-- ===== Programs ===== -->
+  <section id="programs" class="light">
+    <h2>Our Programs</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Learning Centres</h3>
+        <p>Free tuition and homework help for children.</p>
+      </div>
+      <div class="card">
+        <h3>Community Kitchen</h3>
+        <p>Hot meals served to families every day.</p>
+      </div>
+      <div class="card">
+        <h3>Health Camps</h3>
+        <p>Free check-ups and medicines every month.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Donation Form ===== -->
+  <section id="donate">
+    <h2>Make a Donation</h2>
+
+    <form id="donateForm">
+      <p><strong>Choose an amount:</strong></p>
+      <div class="amount-row">
+        <button type="button" class="amount-btn" onclick="setAmount(500)">Rs. 500</button>
+        <button type="button" class="amount-btn" onclick="setAmount(1500)">Rs. 1500</button>
+        <button type="button" class="amount-btn" onclick="setAmount(5000)">Rs. 5000</button>
+      </div>
+
+      <label for="dName">Full Name</label>
+      <input type="text" id="dName">
+      <p class="error" id="dNameError"></p>
+
+      <label for="dEmail">Email</label>
+      <input type="email" id="dEmail">
+      <p class="error" id="dEmailError"></p>
+
+      <label for="dAmount">Amount (Rs.)</label>
+      <input type="number" id="dAmount">
+      <p class="error" id="dAmountError"></p>
+
+      <button type="submit" class="btn">Donate</button>
+      <button type="reset" class="btn btn-grey">Clear</button>
+
+      <p class="success" id="donateMsg"></p>
+    </form>
+  </section>
+
+  <!-- ===== Volunteer Form ===== -->
+  <section id="volunteer" class="light">
+    <h2>Become a Volunteer</h2>
+
+    <form id="volunteerForm">
+      <label for="vName">Full Name</label>
+      <input type="text" id="vName">
+      <p class="error" id="vNameError"></p>
+
+      <label for="vPhone">Phone Number</label>
+      <input type="text" id="vPhone" placeholder="10-digit number">
+      <p class="error" id="vPhoneError"></p>
+
+      <label for="vArea">Where would you like to help?</label>
+      <select id="vArea">
+        <option value="">-- Select --</option>
+        <option>Teaching</option>
+        <option>Community Kitchen</option>
+        <option>Health Camps</option>
+      </select>
+      <p class="error" id="vAreaError"></p>
+
+      <button type="submit" class="btn">Sign Up</button>
+      <button type="reset" class="btn btn-grey">Clear</button>
+
+      <p class="success" id="volunteerMsg"></p>
+    </form>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>&copy; 2026 Asha Kiran Foundation | hello@ashakiran.example</p>
+  </footer>
+
+  <!-- ===== Inline JavaScript ===== -->
+  <script>
+    // Fill the amount box when a preset button is clicked
+    function setAmount(value) {
+      document.getElementById("dAmount").value = value;
+    }
+
+    // ----- Donation form -----
+    document.getElementById("donateForm").addEventListener("submit", function (event) {
+      event.preventDefault();   // stop the page from reloading
+
+      let name = document.getElementById("dName").value.trim();
+      let email = document.getElementById("dEmail").value.trim();
+      let amount = document.getElementById("dAmount").value;
+      let valid = true;
+
+      // Clear old messages
+      document.getElementById("dNameError").textContent = "";
+      document.getElementById("dEmailError").textContent = "";
+      document.getElementById("dAmountError").textContent = "";
+      document.getElementById("donateMsg").textContent = "";
+
+      if (name === "") {
+        document.getElementById("dNameError").textContent = "Please enter your name.";
+        valid = false;
+      }
+
+      if (email === "" || !email.includes("@") || !email.includes(".")) {
+        document.getElementById("dEmailError").textContent = "Please enter a valid email.";
+        valid = false;
+      }
+
+      if (amount === "" || amount <= 0) {
+        document.getElementById("dAmountError").textContent = "Please enter an amount above 0.";
+        valid = false;
+      }
+
+      if (valid) {
+        document.getElementById("donateMsg").textContent =
+          "Thank you, " + name + "! Your donation of Rs. " + amount + " is recorded.";
+        document.getElementById("donateForm").reset();
+      }
+    });
+
+    // ----- Volunteer form -----
+    document.getElementById("volunteerForm").addEventListener("submit", function (event) {
+      event.preventDefault();   // stop the page from reloading
+
+      let name = document.getElementById("vName").value.trim();
+      let phone = document.getElementById("vPhone").value.trim();
+      let area = document.getElementById("vArea").value;
+      let valid = true;
+
+      // Clear old messages
+      document.getElementById("vNameError").textContent = "";
+      document.getElementById("vPhoneError").textContent = "";
+      document.getElementById("vAreaError").textContent = "";
+      document.getElementById("volunteerMsg").textContent = "";
+
+      if (name === "") {
+        document.getElementById("vNameError").textContent = "Please enter your name.";
+        valid = false;
+      }
+
+      if (phone === "" || phone.length !== 10 || !/^\d+$/.test(phone)) {
+        document.getElementById("vPhoneError").textContent = "Please enter a valid 10-digit phone number.";
+        valid = false;
+      }
+
+      if (area === "") {
+        document.getElementById("vAreaError").textContent = "Please select an area to help.";
+        valid = false;
+      }
+
+      if (valid) {
+        document.getElementById("volunteerMsg").textContent =
+          "Thank you, " + name + "! You have signed up to help in " + area + ".";
+        document.getElementById("volunteerForm").reset();
+      }
+    });
+      </script>
+</body>
+</html>
